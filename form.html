@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare Plan Finder</title>
+    <style>
+        /* Hero Section Styling */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('https://thumbs.dreamstime.com/b/sick-young-woman-lying-hospital-bed-waiting-doctor-sick-young-woman-lying-hospital-bed-waiting-doctor-118290277.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 50px 10%;
+            color: white;
+            transition: padding-bottom 0.5s ease;
+            /* Smooth expand */
+        }
+
+        .hero.expanded {
+            padding-bottom: 80px;
+            /* Adds breathing space when form is expanded */
+        }
+
+        .hero-content {
+            display: flex;
+            width: 100%;
+            gap: 40px;
+        }
+
+        /* Left Content */
+        .left-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .left-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .left-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Right Box */
+        .right-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 400px;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .box-text h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .box-text p {
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+
+        /* Form Styling */
+        .zipcode-form,
+        .expanded-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+       
+        .zipcode-form input,
+        .expanded-form input {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .zipcode-form input:focus,
+        .expanded-form input:focus {
+            outline: none;
+            border-color: #128C7E;
+            box-shadow: 0 0 5px rgba(18, 140, 126, 0.3);
+        }
+
+        /* Labels */
+        .form-row {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        /* Buttons */
+        .find-btn,
+        .submit-btn {
+            background: #128C7E;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .find-btn:hover,
+        .submit-btn:hover {
+            background: #16ab9a;
+        }
+
+        /* Checkbox */
+        .checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .checkbox input {
+            margin-top: 3px;
+        }
+
+        /* Smooth Appearance */
+        #expandedForm {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        #expandedForm.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .left-content {
+                max-width: 100%;
+            }
+
+            .right-box {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 0 5%;
+            }
+
+            .left-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .left-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Left Content -->
+            <div class="left-content">
+                <h1>Find the Right Medicare Plan for You</h1>
+                <p>
+                    Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that
+                    fit your needs.
+                    We take the time to understand your health priorities, prescription requirements, and budget, so we
+                    can match you
+                    with a plan that offers the right balance of coverage and cost.
+                </p>
+            </div>
+
+            <!-- Right Box -->
+            <div class="right-box" aria-live="polite">
+                <!-- ZIP CODE CARD -->
+                <div class="box-text" id="zipCard">
+                    <h3>Check Plan Options</h3>
+                    <p>Enter your ZIP code to see available Medicare plans in your area.</p>
+                    <form class="zipcode-form" id="zipForm">
+                        <input id="zipInput" type="text" placeholder="Enter ZIP code" required>
+                        <button type="submit" class="find-btn">Find Out More</button>
+                    </form>
+                </div>
+
+                <!-- EXPANDED FORM -->
+                <div class="expanded-form" id="expandedForm" hidden aria-hidden="true">
+                    <h3>Get Your Personalized Plan Matches</h3>
+                    <p class="sub">Complete the form below so we can tailor recommendations for <span
+                            id="zipEcho"></span>.</p>
+                    <form id="detailsForm">
+                        <div class="form-row">
+                            <label for="firstName">First name</label>
+                            <input id="firstName" name="firstName" type="text" placeholder="First name" required />
+                        </div>
+                        <div class="form-row">
+                            <label for="lastName">Last name</label>
+                            <input id="lastName" name="lastName" type="text" placeholder="Last name" required />
+                        </div>
+                        <div class="form-row">
+                            <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="tel" placeholder="Phone no" required />
+                        </div>
+                        <div class="form-row">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+                        </div>
+                        <label class="checkbox">
+                            <input type="checkbox" id="consent" required />
+                            I agree to be contacted about Medicare plan options.
+                        </label>
+                        <button type="submit" class="submit-btn">See My Matches</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            const zipForm = document.getElementById("zipForm");
+            const zipInput = document.getElementById("zipInput");
+            const zipCard = document.getElementById("zipCard");
+            const expandedFormWrapper = document.getElementById("expandedForm");
+            const zipEcho = document.getElementById("zipEcho");
+
+            function isLikelyZip(v) {
+                const zipRegex = /^\d{5}(?:-\d{4})?$/;
+                return zipRegex.test(v.trim());
+            }
+
+            zipForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const zip = zipInput.value.trim();
+                if (!isLikelyZip(zip)) {
+                    zipInput.setCustomValidity("Please enter a valid ZIP/postal code.");
+                    zipInput.reportValidity();
+                    return;
+                }
+                zipInput.setCustomValidity("");
+                zipEcho.textContent = zip;
+                zipCard.hidden = true;
+                expandedFormWrapper.hidden = false;
+                setTimeout(() => expandedFormWrapper.classList.add("show"), 10);
+                expandedFormWrapper.querySelector("input").focus();
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

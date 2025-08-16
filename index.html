@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>CareEase - Medicare Support Services</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4434/4434478.png" sizes="any">
+    <title>PlanFinder Medicare</title>
 </head>
 <body>
     <header class="nav-container">
         <nav class="simple-navbar">
             <h1 class="brand">PlanFinder Medicare</h1>
             <a href="https://wa.me/923001234567" target="_blank" class="whatsapp-link" aria-label="Contact via WhatsApp">
-                +92 300 1234567
+                +1 1234567890
             </a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- <section class="hero">
         <div class="hero-content">
             <div class="left-content">
                 <h1>Find the Right Medicare Plan for You</h1>
-                <p>Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that fit your needs.</p>
+                <p>Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that fit your needs. We take the time to understand your health priorities, prescription requirements, and budget, so we can match you with a plan that offers the right balance of coverage and cost. Our goal is to make Medicare simple, stress-free, and tailored just for you.</p>
             </div>
             <div class="right-box">
                 <div class="box-text">
@@ -30,11 +30,71 @@
                 </div>
                 <form class="zipcode-form">
                     <input type="text" placeholder="Enter ZIP code" required>
-                    <button type="submit" class="find-btn">View Plans</button>
+                    <button type="submit" class="find-btn">Find Out More</button>
                 </form>
             </div>
         </div>
+    </section> -->
+
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Left Content -->
+            <div class="left-content">
+                <h1>Find the Right Medicare Plan for You</h1>
+                <p>
+                    Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that
+                    fit your needs.
+                    We take the time to understand your health priorities, prescription requirements, and budget, so we
+                    can match you
+                    with a plan that offers the right balance of coverage and cost.
+                </p>
+            </div>
+
+            <!-- Right Box -->
+            <div class="right-box" aria-live="polite">
+                <!-- ZIP CODE CARD -->
+                <div class="box-text" id="zipCard">
+                    <h3>Check Plan Options</h3>
+                    <p>Enter your ZIP code to see available Medicare plans in your area.</p>
+                    <form class="zipcode-form" id="zipForm">
+                        <input id="zipInput" type="text" placeholder="Enter ZIP code" required>
+                        <button type="submit" class="find-btn">Find Out More</button>
+                    </form>
+                </div>
+
+                <!-- EXPANDED FORM -->
+                <div class="expanded-form" id="expandedForm" hidden aria-hidden="true">
+                    <h3>Get Your Personalized Plan Matches</h3>
+                    <p class="sub">Complete the form below so we can tailor recommendations for <span
+                            id="zipEcho"></span>.</p>
+                    <form id="detailsForm">
+                        <div class="form-row">
+                            <label for="firstName">First name:</label>
+                            <input id="firstName" name="firstName" type="text" placeholder="Ali" required />
+                        </div>
+                        <div class="form-row">
+                            <label for="lastName">Last name:</label>
+                            <input id="lastName" name="lastName" type="text" placeholder="Zain" required />
+                        </div>
+                        <div class="form-row">
+                            <label for="phone">Phone:</label>
+                            <input id="phone" name="phone" type="tel" placeholder="+1 000 000 0000" required />
+                        </div>
+                        <div class="form-row">
+                            <label for="email">Email:</label>
+                            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+                        </div>
+                        <label class="checkbox">
+                            <input type="checkbox" id="consent" required />
+                            I agree to be contacted about Medicare plan options.
+                        </label>
+                        <button type="submit" class="submit-btn">submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
+
 
     <!-- Features Section -->
     <section class="features-section">
@@ -61,14 +121,14 @@
         </div>
         <div class="section-text">
             <h2>Personalized Medicare Guidance</h2>
-            <p>Every person’s health needs are unique. Our advisors work with you to choose a plan that matches your medical and financial situation.</p>
+            <p>Every person’s health needs are unique. Our advisors work with you to choose a plan that matches your medical and financial situation. We take the time to understand your prescriptions, preferred doctors, and budget, so you can get the right coverage without paying for services you don’t need. With our personalized guidance, you’ll feel confident knowing your healthcare future is in safe hands.</p>
         </div>
     </section>
     
     <section class="content-section section-2">
         <div class="section-text">
             <h2>Understand Your Options</h2>
-            <p>We simplify complex Medicare terms so you can make informed decisions about your healthcare coverage.</p>
+            <p>We simplify complex Medicare terms so you can make informed decisions about your healthcare coverage. From understanding deductibles and copayments to comparing plan benefits, we break everything down into simple, clear language. Our goal is to ensure you feel confident about the plan you choose — without confusion or uncertainty.</p>
         </div>
         <div class="section-img">
             <img src="https://images.squarespace-cdn.com/content/v1/5aa96c579772aea9adaa2ef7/1616678742602-Z5074E7ZV71R4LKQFROG/ImportanceofPatientComfort_0321.jpg" alt="Healthcare consultation">
@@ -81,7 +141,7 @@
         </div>
         <div class="section-text">
             <h2>Expert Support at Every Step</h2>
-            <p>From your first question to final enrollment, our licensed agents are here to ensure you get the benefits you deserve.</p>
+            <p>From your first question to final enrollment, our licensed agents are here to ensure you get the benefits you deserve. We stay by your side through every form, phone call, and plan comparison — making sure no detail is overlooked. With our support, you can navigate Medicare with ease and secure the coverage that truly works for you.</p>
         </div>
     </section>
 
@@ -117,5 +177,39 @@
             </div>
         </div>
     </footer>
+
+
+
+    
+        <script>
+        (function () {
+            const zipForm = document.getElementById("zipForm");
+            const zipInput = document.getElementById("zipInput");
+            const zipCard = document.getElementById("zipCard");
+            const expandedFormWrapper = document.getElementById("expandedForm");
+            const zipEcho = document.getElementById("zipEcho");
+
+            function isLikelyZip(v) {
+                const zipRegex = /^\d{5}(?:-\d{4})?$/;
+                return zipRegex.test(v.trim());
+            }
+
+            zipForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const zip = zipInput.value.trim();
+                if (!isLikelyZip(zip)) {
+                    zipInput.setCustomValidity("Please enter a valid ZIP/postal code.");
+                    zipInput.reportValidity();
+                    return;
+                }
+                zipInput.setCustomValidity("");
+                zipEcho.textContent = zip;
+                zipCard.hidden = true;
+                expandedFormWrapper.hidden = false;
+                setTimeout(() => expandedFormWrapper.classList.add("show"), 10);
+                expandedFormWrapper.querySelector("input").focus();
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -69,45 +69,50 @@
         }
 
 
-
-        /* Hero Section */
+        /* Hero Section Styling */
         .hero {
             position: relative;
-            height: 80vh;
-            min-height: 600px;
-            background: 
+            min-height: 80vh;
+            background:
                 linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
                 url('https://thumbs.dreamstime.com/b/sick-young-woman-lying-hospital-bed-waiting-doctor-sick-young-woman-lying-hospital-bed-waiting-doctor-118290277.jpg') center/cover no-repeat;
             display: flex;
             align-items: center;
-            padding: 0 10%;
+            padding: 50px 10%;
             color: white;
+            transition: padding-bottom 0.5s ease;
+            /* Smooth expand */
         }
-        
+
+        .hero.expanded {
+            padding-bottom: 80px;
+            /* Adds breathing space when form is expanded */
+        }
+
         .hero-content {
             display: flex;
             width: 100%;
             gap: 40px;
         }
-        
+
         /* Left Content */
         .left-content {
             flex: 1;
             max-width: 600px;
         }
-        
+
         .left-content h1 {
             font-size: 3rem;
             margin-bottom: 20px;
             line-height: 1.2;
         }
-        
+
         .left-content p {
             font-size: 1.2rem;
             line-height: 1.6;
             opacity: 0.9;
         }
-        
+
         /* Right Box */
         .right-box {
             background: white;
@@ -117,89 +122,133 @@
             color: #333;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
-        .box-text {
-            margin-bottom: 25px;
-        }
-        
+
         .box-text h3 {
             color: #2c3e50;
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
-        
+
         .box-text p {
             color: #7f8c8d;
             line-height: 1.5;
+            padding-bottom: 15px;
         }
-        
-        .zipcode-form {
+
+        /* Form Styling */
+        .zipcode-form,
+        .expanded-form form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
         }
-        
-        .zipcode-form input {
+
+        .zipcode-form input,
+        .expanded-form input {
             padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
+            transition: all 0.2s ease;
         }
-        
-        .zipcode-form input:focus {
+
+        .zipcode-form input:focus,
+        .expanded-form input:focus {
             outline: none;
             border-color: #128C7E;
+            box-shadow: 0 0 5px rgba(18, 140, 126, 0.3);
         }
-        
-        .find-btn {
+
+        /* Labels */
+        .form-row {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        /* Buttons */
+        .find-btn,
+        .submit-btn {
             background: #128C7E;
             color: white;
             border: none;
             padding: 12px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.3s;
         }
-        
-        .find-btn:hover {
+
+        .find-btn:hover,
+        .submit-btn:hover {
             background: #16ab9a;
         }
-        
-        /* Responsive Design */
+
+        /* Checkbox */
+        .checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .checkbox input {
+            margin-top: 3px;
+        }
+
+        /* Smooth Appearance */
+        #expandedForm {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        #expandedForm.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
         @media (max-width: 992px) {
             .hero-content {
                 flex-direction: column;
                 gap: 30px;
             }
-            
+
             .left-content {
                 max-width: 100%;
             }
-            
+
             .right-box {
                 width: 100%;
                 max-width: 500px;
             }
         }
-        
+
         @media (max-width: 576px) {
             .hero {
-                padding: 0 5%;
+                padding: 5 5%;
             }
-            
+
             .left-content h1 {
                 font-size: 2.2rem;
             }
-            
+
             .left-content p {
                 font-size: 1rem;
             }
         }
 
+
         /* Consistent with previous styles */
-              
         .features-section {
             padding: 60px 10%;
             background-color: #f9f9f9;
