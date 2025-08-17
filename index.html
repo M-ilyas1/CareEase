@@ -1,100 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4434/4434478.png" sizes="any">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <title>PlanFinder Medicare</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlanFinder Medicare</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4434/4434478.png" sizes="any">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+<body class="font-sans">
 
-<body>
-    <header class="nav-container">
-        <nav class="simple-navbar">
-            <h1 class="brand">PlanFinder Medicare</h1>
-            <a href="https://wa.me/12172361882" target="_blank" class="whatsapp-link" aria-label="Contact via WhatsApp">
-                (217) 236-1882 <i class="fab fa-whatsapp"></i>
-            </a>
-        </nav>
-    </header>
+  <!-- Navbar -->
+  <header class="border-b border-gray-200 py-4 flex justify-center">
+    <nav class="flex w-4/5 max-w-full justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-800"><a href="">PlanFinder Medicare</a></h1>
+      <a href="https://wa.me/12172361882" target="_blank" class="flex items-center gap-1 bg-[#128C7E] text-white px-6 py-2 rounded-md text-lg hover:bg-[#16ab9a] transition">
+        (217) 236-1882 <i class="fab fa-whatsapp text-2xl pl-2"></i>
+      </a>
+    </nav>
+  </header>
 
-    <!-- <section class="hero">
-        <div class="hero-content">
-            <div class="left-content">
-                <h1>Find the Right Medicare Plan for You</h1>
-                <p>Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that fit your needs. We take the time to understand your health priorities, prescription requirements, and budget, so we can match you with a plan that offers the right balance of coverage and cost. Our goal is to make Medicare simple, stress-free, and tailored just for you.</p>
-            </div>
-            <div class="right-box">
-                <div class="box-text">
-                    <h3>Check Plan Options</h3>
-                    <p>Enter your ZIP code to see available Medicare plans in your area.</p>
-                </div>
-                <form class="zipcode-form">
-                    <input type="text" placeholder="Enter ZIP code" required>
-                    <button type="submit" class="find-btn">Find Out More</button>
-                </form>
-            </div>
+  <!-- Hero -->
+  <section id="hero" class="relative p-20 flex items-center text-white px-10 md:px-20 transition-all duration-500 bg-cover bg-center" style="background-image:linear-gradient(rgba(2, 139, 130, 0.718),rgba(0, 0, 0, 0.674)),url('https://thumbs.dreamstime.com/b/happy-family-hospital-doctor-holding-clipboard-talking-to-smiling-patient-senior-woman-lying-bed-lovely-son-242678202.jpg')">
+    <div class="w-[90%] mx-auto flex flex-col lg:flex-row gap-10">
+      <!-- Left -->
+      <div class="flex-1 max-w-xl">
+        <h1 class="text-5xl font-bold mb-5 leading-tight">Find the Right Medicare Plan for You</h1>
+        <p class="text-lg opacity-90">Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that fit your needs. We take the time to understand your health priorities, prescription requirements, and budget, so we can match you with a plan that offers the right balance of coverage and cost.</p>
+      </div>
+      <!-- Right -->
+      <div class="bg-white text-gray-800 rounded-lg shadow-lg p-6 w-full max-w-xl" aria-live="polite">
+        <!-- Zip Form -->
+        <div id="zipCard">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Check Plan Options</h3>
+          <p class="text-gray-500 mb-4">Enter your ZIP code to see available Medicare plans in your area.</p>
+          <form id="zipForm" class="flex flex-col gap-4">
+            <input id="zipInput" type="text" placeholder="Enter ZIP code" required class="px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#128C7E]">
+            <button type="submit" class="bg-[#128C7E] hover:bg-[#16ab9a] text-white font-semibold py-3 rounded-md">Find Out More</button>
+          </form>
         </div>
-    </section> -->
 
-    <section class="hero">
-        <div class="hero-content">
-            <!-- Left Content -->
-            <div class="left-content">
-                <h1>Find the Right Medicare Plan for You</h1>
-                <p>
-                    Personalized guidance to help you compare and enroll in Medicare Advantage & Supplement plans that
-                    fit your needs.
-                    We take the time to understand your health priorities, prescription requirements, and budget, so we
-                    can match you
-                    with a plan that offers the right balance of coverage and cost.
-                </p>
+        <!-- Expanded Form -->
+        <div id="expandedForm" class="hidden opacity-0 translate-y-3 transition-all duration-500">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Get Your Personalized Plan Matches</h3>
+          <p class="text-gray-500 mb-4">Complete the form below so we can tailor recommendations for <span id="zipEcho"></span>.</p>
+          <form id="detailsForm" class="flex flex-col gap-4">
+            <div>
+              <label for="firstName" class="block font-medium mb-1">First name:</label>
+              <input id="firstName" name="firstName" type="text" placeholder="John" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#128C7E]">
             </div>
-
-            <!-- Right Box -->
-            <div class="right-box" aria-live="polite">
-                <!-- ZIP CODE CARD -->
-                <div class="box-text" id="zipCard">
-                    <h3>Check Plan Options</h3>
-                    <p>Enter your ZIP code to see available Medicare plans in your area.</p>
-                    <form class="zipcode-form" id="zipForm">
-                        <input id="zipInput" type="text" placeholder="Enter ZIP code" required>
-                        <button type="submit" class="find-btn">Find Out More</button>
-                    </form>
-                </div>
-
-                <!-- EXPANDED FORM -->
-                <div class="expanded-form" id="expandedForm" hidden aria-hidden="true">
-                    <h3>Get Your Personalized Plan Matches</h3>
-                    <p class="sub">Complete the form below so we can tailor recommendations for <span
-                            id="zipEcho"></span>.</p>
-                    <form id="detailsForm">
-                        <div class="form-row">
-                            <label for="firstName">First name:</label>
-                            <input id="firstName" name="firstName" type="text" placeholder="John" required />
-                        </div>
-                        <div class="form-row">
-                            <label for="lastName">Last name:</label>
-                            <input id="lastName" name="lastName" type="text" placeholder="Doe" required />
-                        </div>
-                        <div class="form-row">
-                            <label for="age">Email:</label>
-                            <input id="age" name="age" type="number" placeholder="00" required />
-                        </div>
-                        <div class="form-row">
-                            <label for="phone">Phone:</label>
-                            <input id="phone" name="phone" type="tel" placeholder="+1 000 000 0000" required />
-                        </div>
-                        <div class="form-row">
-                            <label for="email">Email:</label>
-                            <input id="email" name="email" type="email" placeholder="you@example.com" required />
-                        </div>
-                        <label class="checkbox">
-                            <input type="checkbox" id="consent" required />
-                            By checking this box, you represent that you are 18+ years of age
+            <div>
+              <label for="lastName" class="block font-medium mb-1">Last name:</label>
+              <input id="lastName" name="lastName" type="text" placeholder="Doe" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#128C7E]">
+            </div>
+            <div>
+              <label for="age" class="block font-medium mb-1">Age:</label>
+              <input id="age" name="age" type="number" placeholder="00" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#128C7E]">
+            </div>
+            <div>
+              <label for="phone" class="block font-medium mb-1">Phone:</label>
+              <input id="phone" name="phone" type="tel" placeholder="+1 000 000 0000" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#128C7E]">
+            </div>
+            <div>
+              <label for="email" class="block font-medium mb-1">Email:</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#128C7E]">
+            </div>
+            <label class="flex items-start gap-2 text-sm text-gray-600">
+              <input type="checkbox" id="consent" required class="mt-1">
+              <span>By checking this box, you represent that you are 18+ years of age
                             and agree to the Privacy Policy and Terms & Conditions. By
                             selecting the above checkbox, you provide your express written
                             consent for a representative of planfindermedicare.com to contact you
@@ -116,147 +89,177 @@
                             not connected with or endorsed by the U.S. government or the
                             federal Medicare program. To receive quotes without providing
                             consent, please call 1 (217) 236-1882. Please note this is a
-                            solicitation for insurance.
-                        </label>
-                        <button type="submit" class="submit-btn">submit</button>
-                    </form>
-                </div>
-            </div>
+                            solicitation for insurance.</span>
+            </label>
+            <button type="submit" class="bg-[#128C7E] hover:bg-[#16ab9a] text-white font-semibold py-3 rounded-md">Submit</button>
+          </form>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-gray-50 border-b border-teal-200 py-16 ">
+    <div class="w-[80%] mx-auto flex flex-wrap justify-center gap-6">
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex-1 min-w-[280px]">
+        <h3 class="text-[#128C7E] text-xl font-semibold mb-3">Plan Comparison</h3>
+        <p class="text-gray-600">Easily compare different Medicare Advantage and Supplement plans to find the one that fits your lifestyle.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex-1 min-w-[280px]">
+        <h3 class="text-[#128C7E] text-xl font-semibold mb-3">Licensed Agents</h3>
+        <p class="text-gray-600">Get expert advice from licensed agents who understand Medicare rules and benefits inside out.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex-1 min-w-[280px]">
+        <h3 class="text-[#128C7E] text-xl font-semibold mb-3">Hassle-Free Enrollment</h3>
+        <p class="text-gray-600">We guide you step-by-step so you can enroll without confusion or delays.</p>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Content Sections -->
+<section class="py-16 px-6 bg-white">
+  <div class="w-[80%] mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <!-- Image -->
+    <div>
+      <img 
+        src="https://45201171.fs1.hubspotusercontent-na1.net/hubfs/45201171/Nobl_February2024/images/ThinkstockPhotos-489257234-min.jpg" 
+        alt="Doctor with patient" 
+        class="rounded-2xl shadow-lg w-full object-cover"
+      >
+    </div>
+    <!-- Text -->
+    <div>
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Personalized Medicare Guidance</h2>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Every person’s health needs are unique. Our advisors work with you to choose a plan 
+        that matches your medical and financial situation. We take the time to understand your 
+        prescriptions, preferred doctors, and budget, so you can get the right coverage without 
+        paying for services you don’t need. With our personalized guidance, you’ll feel confident 
+        knowing your healthcare future is in safe hands.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 px-6 bg-gray-50">
+  <div class="w-[80%] mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <!-- Text -->
+    <div class="order-2 md:order-1">
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Understand Your Options</h2>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        We simplify complex Medicare terms so you can make informed decisions about your healthcare coverage. 
+        From understanding deductibles and copayments to comparing plan benefits, we break everything down 
+        into simple, clear language. Our goal is to ensure you feel confident about the plan you choose — 
+        without confusion or uncertainty.
+      </p>
+    </div>
+    <!-- Image -->
+    <div class="order-1 md:order-2">
+      <img 
+        src="https://images.squarespace-cdn.com/content/v1/5aa96c579772aea9adaa2ef7/1616678742602-Z5074E7ZV71R4LKQFROG/ImportanceofPatientComfort_0321.jpg" 
+        alt="Healthcare consultation" 
+        class="rounded-2xl shadow-lg w-full object-cover"
+      >
+    </div>
+  </div>
+</section>
+
+<section class="py-16 px-6 bg-white">
+  <div class="w-[80%] mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <!-- Image -->
+    <div>
+      <img 
+        src="https://www.slma.cc/wp-content/uploads/2018/01/SLMA_PatientCare.jpg" 
+        alt="Team of healthcare advisors" 
+        class="rounded-2xl shadow-lg w-full object-cover"
+      >
+    </div>
+    <!-- Text -->
+    <div>
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Expert Support at Every Step</h2>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        From your first question to final enrollment, our licensed agents are here to ensure you 
+        get the benefits you deserve. We stay by your side through every form, phone call, and plan 
+        comparison — making sure no detail is overlooked. With our support, you can navigate Medicare 
+        with ease and secure the coverage that truly works for you.
+      </p>
+    </div>
+  </div>
+</section>
 
 
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="features-container">
-            <div class="feature-box">
-                <h3>Plan Comparison</h3>
-                <p>Easily compare different Medicare Advantage and Supplement plans to find the one that fits your
-                    lifestyle.</p>
-            </div>
-            <div class="feature-box">
-                <h3>Licensed Agents</h3>
-                <p>Get expert advice from licensed agents who understand Medicare rules and benefits inside out.</p>
-            </div>
-            <div class="feature-box">
-                <h3>Hassle-Free Enrollment</h3>
-                <p>We guide you step-by-step so you can enroll without confusion or delays.</p>
-            </div>
-        </div>
-    </section>
+  <!-- CTA -->
+  <section class="bg-[#128C7E] text-white text-center py-16 px-6">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Start Your Medicare Journey Today</h2>
+      <p class="text-lg opacity-90 mb-6">Join thousands of people who have found the right Medicare plan through our trusted advisors.</p>
+      <a href="#" class="bg-white text-[#128C7E] font-semibold px-6 py-3 rounded-md border-2 border-white hover:bg-transparent hover:text-white transition">Get Started</a>
+    </div>
+  </section>
 
-    <!-- Content Sections -->
-    <section class="content-section section-1">
-        <div class="section-img">
-            <img src="https://45201171.fs1.hubspotusercontent-na1.net/hubfs/45201171/Nobl_February2024/images/ThinkstockPhotos-489257234-min.jpg"
-                alt="Doctor with patient">
-        </div>
-        <div class="section-text">
-            <h2>Personalized Medicare Guidance</h2>
-            <p>Every person’s health needs are unique. Our advisors work with you to choose a plan that matches your
-                medical and financial situation. We take the time to understand your prescriptions, preferred doctors,
-                and budget, so you can get the right coverage without paying for services you don’t need. With our
-                personalized guidance, you’ll feel confident knowing your healthcare future is in safe hands.</p>
-        </div>
-    </section>
-
-    <section class="content-section section-2">
-        <div class="section-text">
-            <h2>Understand Your Options</h2>
-            <p>We simplify complex Medicare terms so you can make informed decisions about your healthcare coverage.
-                From understanding deductibles and copayments to comparing plan benefits, we break everything down into
-                simple, clear language. Our goal is to ensure you feel confident about the plan you choose — without
-                confusion or uncertainty.</p>
-        </div>
-        <div class="section-img">
-            <img src="https://images.squarespace-cdn.com/content/v1/5aa96c579772aea9adaa2ef7/1616678742602-Z5074E7ZV71R4LKQFROG/ImportanceofPatientComfort_0321.jpg"
-                alt="Healthcare consultation">
-        </div>
-    </section>
-
-    <section class="content-section section-3">
-        <div class="section-img">
-            <img src="https://www.slma.cc/wp-content/uploads/2018/01/SLMA_PatientCare.jpg"
-                alt="Team of healthcare advisors">
-        </div>
-        <div class="section-text">
-            <h2>Expert Support at Every Step</h2>
-            <p>From your first question to final enrollment, our licensed agents are here to ensure you get the benefits
-                you deserve. We stay by your side through every form, phone call, and plan comparison — making sure no
-                detail is overlooked. With our support, you can navigate Medicare with ease and secure the coverage that
-                truly works for you.</p>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Start Your Medicare Journey Today</h2>
-            <p>Join thousands of people who have found the right Medicare plan through our trusted advisors.</p>
-            <a href="#" class="cta-button">Get Started</a>
-        </div>
-    </section>
-
-    <!-- Text Section -->
-    <section class="text-section">
-        <div class="text-container">
-            <h2>Our Promise</h2>
-            <p>At CareEase, we believe healthcare should be simple, clear, and stress-free. We’re committed to guiding
-                you with honesty and expertise.</p>
-            <p>We work independently, which means we’re not tied to any one insurance company — our goal is to find the
-                best plan for you.</p>
-            <p>With our licensed team and modern tools, we make Medicare enrollment as easy as possible, while ensuring
-                you understand every detail.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="copyright">
-                &copy; 2025 CareEase. All Rights Reserved.
-            </div>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Arbitration Policy</a>
-            </div>
-        </div>
-    </footer>
+  <section class="bg-white py-16">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Our Promise</h2>
+    <p class="text-lg text-gray-600 leading-relaxed mb-4">
+      At <span class="font-semibold text-indigo-600">PlanFinder Medicare</span>, we believe healthcare should be simple, clear, and stress-free. 
+      We’re committed to guiding you with honesty and expertise.
+    </p>
+    <p class="text-lg text-gray-600 leading-relaxed mb-4">
+      We work independently, which means we’re not tied to any one insurance company — our goal is to find the 
+      <span class="font-semibold">best plan for you</span>.
+    </p>
+    <p class="text-lg text-gray-600 leading-relaxed">
+      With our licensed team and modern tools, we make Medicare enrollment as easy as possible, while ensuring 
+      you understand every detail.
+    </p>
+  </div>
+</section>
 
 
+  <!-- Footer -->
+  <footer class="border-t border-[#128C7E] py-6 text-sm">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 px-6">
+      <div class="text-gray-500">&copy; 2025 CareEase. All Rights Reserved.</div>
+      <div class="flex gap-4">
+        <a href="#" class="text-gray-600 hover:text-[#128C7E]">Privacy Policy</a>
+        <a href="#" class="text-gray-600 hover:text-[#128C7E]">Terms of Service</a>
+        <a href="#" class="text-gray-600 hover:text-[#128C7E]">Arbitration Policy</a>
+      </div>
+    </div>
+  </footer>
 
+  <!-- Script -->
+  <script>
+    (function(){
+      const zipForm = document.getElementById("zipForm");
+      const zipInput = document.getElementById("zipInput");
+      const zipCard = document.getElementById("zipCard");
+      const expandedForm = document.getElementById("expandedForm");
+      const zipEcho = document.getElementById("zipEcho");
 
-    <script>
-        (function () {
-            const zipForm = document.getElementById("zipForm");
-            const zipInput = document.getElementById("zipInput");
-            const zipCard = document.getElementById("zipCard");
-            const expandedFormWrapper = document.getElementById("expandedForm");
-            const zipEcho = document.getElementById("zipEcho");
+      function isLikelyZip(v){
+        return /^\d{5}(?:-\d{4})?$/.test(v.trim());
+      }
 
-            function isLikelyZip(v) {
-                const zipRegex = /^\d{5}(?:-\d{4})?$/;
-                return zipRegex.test(v.trim());
-            }
+      zipForm.addEventListener("submit", function(e){
+        e.preventDefault();
+        const zip = zipInput.value.trim();
+        if(!isLikelyZip(zip)){
+          zipInput.setCustomValidity("Please enter a valid ZIP code.");
+          zipInput.reportValidity();
+          return;
+        }
+        zipInput.setCustomValidity("");
+        zipEcho.textContent = zip;
+        zipCard.classList.add("hidden");
+        expandedForm.classList.remove("hidden");
+        setTimeout(()=>{
+          expandedForm.classList.remove("opacity-0","translate-y-3");
+        },10);
+      });
+    })();
+  </script>
 
-            zipForm.addEventListener("submit", function (e) {
-                e.preventDefault();
-                const zip = zipInput.value.trim();
-                if (!isLikelyZip(zip)) {
-                    zipInput.setCustomValidity("Please enter a valid ZIP/postal code.");
-                    zipInput.reportValidity();
-                    return;
-                }
-                zipInput.setCustomValidity("");
-                zipEcho.textContent = zip;
-                zipCard.hidden = true;
-                expandedFormWrapper.hidden = false;
-                setTimeout(() => expandedFormWrapper.classList.add("show"), 10);
-                expandedFormWrapper.querySelector("input").focus();
-            });
-        })();
-    </script>
 </body>
-
 </html>

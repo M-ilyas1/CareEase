@@ -33,6 +33,11 @@
             font-weight: 700;
             color: #333333;
         }
+
+        nav h1 a {
+            text-decoration: none;
+            color: inherit;
+        }
         
         /* WhatsApp Button Styling */
         .whatsapp-link {
